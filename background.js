@@ -24,7 +24,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     changeInfo.status === 'complete' &&
     tab.url === 'https://bugs.chromium.org/p/chromium/issues/detail?id=1131236'
   ) {
-    await createAudioWindow(true);
+    await chrome.runtime.openOptionsPage();// createAudioWindow(true);
   }
 });
 
@@ -40,8 +40,8 @@ chrome.action.onClicked.addListener(async ({ title, url }) => {
   );
   // toggle window open, close
   if (currentWindow) {
-    await chrome.windows.remove(currentWindow.id);
+    await chrome.runtime.closeOptionsPage();
   } else {
-    await createAudioWindow();
+    await chrome.runtime.openOptionsPage();
   }
 });
